@@ -1,13 +1,23 @@
 INDEX VERSION 1.127+/Users/alexmann/Developer/Wikipedia_Search/.metadata/.plugins/org.eclipse.jdt.core
 3966064240.index
 1989473878.index
+793108336.index
+648987673.index
+1186825679.index
 353965938.index
 308786522.index
+2363922511.index
 886486710.index
 4122244616.index
+626545900.index
+88283816.index
+3858792308.index
 4133420628.index
 1660167734.index
 2276114108.index
+3289868555.index
+1578629212.index
+457565986.index
 1271342938.index
 3630079742.index
 1749520324.index
