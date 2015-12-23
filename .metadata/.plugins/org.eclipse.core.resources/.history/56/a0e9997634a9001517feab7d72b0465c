@@ -1,0 +1,28 @@
+package wikisearch;
+
+public class ArticleNode {
+
+	/*	//THIS IS AN EXAMPLE GETTER AND SETTER
+	private String myField; //"private" means access to this is restricted
+	public String getMyField()
+	{
+	     //include validation, logic, logging or whatever you like here
+	    return this.myField;
+	}
+	public void setMyField(String value)
+	{
+	     //include more logic
+	     this.myField = value;
+	}*/
+	
+	
+	private int distance;
+	public int getDistance()
+	{
+		return this.distance;
+	}
+	public void setDistance(int value)
+	{
+		this.distance = value;
+	}
+}

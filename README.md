@@ -23,3 +23,7 @@ TODO:
 
 2. Once you have all the links from article A, test how long it would take to run the same logic (make a call, store links from the page) for every link found on article A. If the time trivial, this project can be done without recursion. Otherwise, develop the recursive / multithreaded algorithm. 
 
+3. Decide whether to include main page links or not
+
+4. Create a Vertex class (struct)
+

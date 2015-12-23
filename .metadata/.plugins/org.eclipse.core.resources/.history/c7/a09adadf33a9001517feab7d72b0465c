@@ -1,0 +1,5 @@
+package wikisearch;
+
+public class ArticleNode {
+
+}
