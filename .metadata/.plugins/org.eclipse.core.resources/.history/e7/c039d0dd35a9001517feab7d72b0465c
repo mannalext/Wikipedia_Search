@@ -21,14 +21,7 @@ import org.apache.http.client.HttpClient;
 public class WikiBot {
 
 	public static void main(String[] args) throws ClientProtocolException, IOException {
-		
-		ArticleNode nexus = new ArticleNode();
-		ArticleNode terminus = new ArticleNode();
-		
-		nexus.setTitle(args[0]);
-		nexus.setDistance(0);
-		nexus.setColor();
-		
+
 		String endpoint = "https://en.wikipedia.org/w/api.php?";
 		String action = "action=query";
 		String prop = "prop=links";
@@ -38,13 +31,11 @@ public class WikiBot {
 		String order = "pldir=ascending";
 		String plcontinue = "plcontinue=14640471%7C0%7CIbragimov_(Martian_crater)"; //the plcontinue argument replaces order in a new query which uses it
 		String rawcontinue = "rawcontinue=";
-		String title = "titles=";
-		String begin = args[0];
-		String end = args[1];
+		String titleA = "titles=Mars";	
 		String delimiter = "&";
 		
 		StringBuilder urlConstruction = new StringBuilder();
-		urlConstruction.append(endpoint + action + delimiter + prop + delimiter + format + delimiter + namespace + delimiter + limit + delimiter + order + delimiter + rawcontinue + delimiter + title + begin);
+		urlConstruction.append(endpoint + action + delimiter + prop + delimiter + format + delimiter + namespace + delimiter + limit + delimiter + order + delimiter + rawcontinue + delimiter + titleA);
 		String url = urlConstruction.toString();
 		
 		HttpClient client = HttpClientBuilder.create().build();

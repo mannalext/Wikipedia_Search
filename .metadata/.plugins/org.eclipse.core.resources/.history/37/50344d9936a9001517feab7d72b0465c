@@ -21,14 +21,7 @@ import org.apache.http.client.HttpClient;
 public class WikiBot {
 
 	public static void main(String[] args) throws ClientProtocolException, IOException {
-		
-		ArticleNode nexus = new ArticleNode();
-		ArticleNode terminus = new ArticleNode();
-		
-		nexus.setTitle(args[0]);
-		nexus.setDistance(0);
-		nexus.setColor();
-		
+
 		String endpoint = "https://en.wikipedia.org/w/api.php?";
 		String action = "action=query";
 		String prop = "prop=links";
@@ -61,6 +54,11 @@ public class WikiBot {
 			}
 			
 		String rawResultAsString = rawResultAsBuffer.toString();
+		
+		if (rawResultAsString.contains("malsdfkj;j"))
+		{
+			int x = 35;
+		}
 
 		System.out.println("debug");
 		
