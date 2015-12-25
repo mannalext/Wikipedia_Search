@@ -21,14 +21,21 @@ import org.apache.http.client.HttpClient;
 public class WikiBot {
 
 	public static void main(String[] args) throws ClientProtocolException, IOException {
-		
-		ArticleNode nexus = new ArticleNode();
-		ArticleNode terminus = new ArticleNode();
-		
-		nexus.setTitle(args[0]);
-		nexus.setDistance(0);
-		nexus.setColor();
-		
+
+		Boolean isContinue = false;
+		String continueValue = "";
+		String url = buildRequest(args, isContinue, continueValue);
+		String rawResult = callAPI(url);
+
+
+		System.out.println("debug");
+
+	}
+
+	private static String buildRequest(String[] args, Boolean isContinue, String continueValue)
+	{
+		StringBuilder urlConstruction = new StringBuilder();
+
 		String endpoint = "https://en.wikipedia.org/w/api.php?";
 		String action = "action=query";
 		String prop = "prop=links";
@@ -36,34 +43,58 @@ public class WikiBot {
 		String namespace = "plnamespace=0";
 		String limit = "pllimit=500&";
 		String order = "pldir=ascending";
-		String plcontinue = "plcontinue=14640471%7C0%7CIbragimov_(Martian_crater)"; //the plcontinue argument replaces order in a new query which uses it
+		String plcontinue = "plcontinue="; //the plcontinue argument replaces order in a new query which uses it
 		String rawcontinue = "rawcontinue=";
 		String title = "titles=";
 		String begin = args[0];
 		String end = args[1];
 		String delimiter = "&";
-		
-		StringBuilder urlConstruction = new StringBuilder();
-		urlConstruction.append(endpoint + action + delimiter + prop + delimiter + format + delimiter + namespace + delimiter + limit + delimiter + order + delimiter + rawcontinue + delimiter + title + begin);
+
+		String tempContinueValue = "14640471%7C0%7CIbragimov_(Martian_crater)";
+
+		if (!isContinue)
+		{
+			urlConstruction.append(endpoint + action + delimiter + prop + delimiter + format + delimiter + namespace + delimiter + limit + delimiter + order + delimiter + rawcontinue + delimiter + title + begin);
+		}
+		else
+		{
+			plcontinue = plcontinue + continueValue;
+			urlConstruction.append(endpoint + action + delimiter + prop + delimiter + format + delimiter + namespace + delimiter + limit + delimiter + plcontinue + delimiter + rawcontinue + delimiter + title + begin);
+		}
+
 		String url = urlConstruction.toString();
-		
-		HttpClient client = HttpClientBuilder.create().build();
-		HttpGet request = new HttpGet(url);
-		HttpResponse httpResponse = client.execute(request);
-		
-		BufferedReader rd = new BufferedReader(
-				new InputStreamReader(httpResponse.getEntity().getContent()));
+		return url;
+	}
+
+	private static String callAPI(String url) //if the return from this function has a continue, set "isContinue" to true in main, so that "buildRequest" will know whether to build a continue or not
+	{
+		String rawResultAsString = "failed";
+
+		try
+		{
+			HttpClient client = HttpClientBuilder.create().build();
+			HttpGet request = new HttpGet(url);
+			HttpResponse httpResponse = client.execute(request);
+
+			BufferedReader rd = new BufferedReader(
+					new InputStreamReader(httpResponse.getEntity().getContent()));
 
 			StringBuffer rawResultAsBuffer = new StringBuffer();
 			String line = "";
-			while ((line = rd.readLine()) != null) {
+			while ((line = rd.readLine()) != null) 
+			{
 				rawResultAsBuffer.append(line);
 			}
-			
-		String rawResultAsString = rawResultAsBuffer.toString();
 
-		System.out.println("debug");
+			rawResultAsString = rawResultAsBuffer.toString();
+			return rawResultAsString;
+		}
+		catch (Exception e)
+		{
+			System.out.println("failed in callAPI");
+		}
 		
+		return rawResultAsString;
 	}
-
 }
+
