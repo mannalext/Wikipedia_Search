@@ -29,6 +29,7 @@ public class WikiBot {
 
 
 		System.out.println("debug");
+		//windows commit worked
 
 	}
 
