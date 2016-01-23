@@ -22,6 +22,8 @@ public class WikiBot {
 
 	public static void main(String[] args) throws ClientProtocolException, IOException {
 
+		
+		//hi from mac on jan 22
 		Boolean isContinue = false;
 		String continueValue = "";
 		String url = buildRequest(args, isContinue, continueValue);
